@@ -78,7 +78,7 @@ async function readBody(request) {
   return text;
 }
 
-export async function onRequest({ request }) {
+async function handleApi(request) {
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: JSON_HEADERS });
   }
@@ -197,3 +197,15 @@ export async function onRequest({ request }) {
     docs: "/#endpoints"
   }, 404);
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api" || url.pathname.startsWith("/api/")) {
+      return handleApi(request);
+    }
+
+    return env.ASSETS.fetch(request);
+  }
+};
