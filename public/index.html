@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="API2 Mock — simple, stateless HTTP endpoints for prototypes, demos and integration tests." />
+  <title>API2 Labs — API2 Mock</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/">API2 <span>Labs</span></a>
+    <nav>
+      <a href="#endpoints">Endpoints</a>
+      <a href="#playground">Playground</a>
+      <a href="https://github.com/" rel="noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">API2 LABS / PROJECT 01</div>
+      <h1>Mock APIs without the setup.</h1>
+      <p class="lede">
+        API2 Mock is a small, stateless HTTP utility for prototypes, demos and integration tests.
+        Echo requests, generate JSON, test status handling and inspect headers — no account required.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#playground">Try it</a>
+        <a class="button" href="#endpoints">Read the API</a>
+      </div>
+      <div class="terminal">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <pre><code>curl https://api2.win/api/mock?status=200&amp;body=%7B%22hello%22%3A%22world%22%7D</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="endpoints">
+      <div class="section-heading">
+        <div class="eyebrow">ZERO-CONFIG ENDPOINTS</div>
+        <h2>Useful primitives. Predictable responses.</h2>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <span class="method">ANY</span>
+          <h3>/api/echo</h3>
+          <p>Returns method, headers, query parameters and request body.</p>
+          <code>POST /api/echo</code>
+        </article>
+        <article class="card">
+          <span class="method">GET</span>
+          <h3>/api/mock</h3>
+          <p>Choose a status code and response body directly in the URL.</p>
+          <code>?status=201&amp;body={"ok":true}</code>
+        </article>
+        <article class="card">
+          <span class="method">GET</span>
+          <h3>/api/status/:code</h3>
+          <p>Return a chosen HTTP status for testing error handling.</p>
+          <code>/api/status/404</code>
+        </article>
+        <article class="card">
+          <span class="method">GET</span>
+          <h3>/api/uuid</h3>
+          <p>Generate a UUID using the runtime's cryptographic UUID generator.</p>
+          <code>/api/uuid</code>
+        </article>
+        <article class="card">
+          <span class="method">GET</span>
+          <h3>/api/time</h3>
+          <p>Return the current server-side ISO timestamp and Unix time.</p>
+          <code>/api/time</code>
+        </article>
+        <article class="card">
+          <span class="method">GET</span>
+          <h3>/api/random</h3>
+          <p>Generate a short array of random numbers for test fixtures.</p>
+          <code>/api/random?count=5&amp;max=100</code>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" id="playground">
+      <div>
+        <div class="eyebrow">PLAYGROUND</div>
+        <h2>Make a live request.</h2>
+        <p class="muted">This calls the same API served from this domain.</p>
+        <div class="controls">
+          <label>
+            Endpoint
+            <select id="endpoint">
+              <option value="/api/echo?hello=world">Echo</option>
+              <option value="/api/mock?status=200&body=%7B%22message%22%3A%22hello%20from%20API2%22%7D">Mock JSON</option>
+              <option value="/api/status/418">Status 418</option>
+              <option value="/api/uuid">UUID</option>
+              <option value="/api/time">Time</option>
+              <option value="/api/random?count=5&max=100">Random</option>
+            </select>
+          </label>
+          <button id="run" class="button primary">Run request</button>
+        </div>
+      </div>
+      <pre class="result"><code id="result">Select an endpoint and run it.</code></pre>
+    </section>
+
+    <section class="section about">
+      <div class="eyebrow">ABOUT API2 LABS</div>
+      <h2>Small developer tools with simple interfaces.</h2>
+      <p>
+        API2 Labs is an independent software project building practical developer utilities,
+        experiments and open-source tools. API2 Mock is the first project.
+      </p>
+      <p class="muted">
+        API2 Mock has no application database and does not intentionally persist request payloads.
+        Do not send secrets or sensitive personal data to public test endpoints.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> API2 Labs</span>
+    <span>Built as a lightweight open-source developer utility.</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
